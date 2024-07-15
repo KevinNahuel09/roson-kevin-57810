@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ZAPATERIA </title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1> Zapateria Barrial Roson </h1>
+    <h2> Ingrese para comenzar a navegar </h2>
+    <form method="post" action="{% url 'bienvenido' %}">
+        {% csrf_token %}
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Pass:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Ingresar</button>
+    </form>
+</body>
+</html>

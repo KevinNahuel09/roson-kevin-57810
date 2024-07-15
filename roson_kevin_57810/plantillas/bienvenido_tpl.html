@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto final</title>
+</head>
+<body>
+    <h1> Proyecto final de roson </h1>
+    <h2> Hoy es {{ hoy }} </h2>
+    <h2> Nombre: {{ nombre }} {{ apellido }} </h2>
+    <h2> Notas de {{ nombre }}, {{ apellido }} </h2>
+     
+    {% for nota in Notas %}
+        {% if nota > 5 %}
+            <p style="color:green">APROBADO {{ nota }}</p>
+        {% else %}
+            <p style="color:red">DESAPROBADO {{ nota }}</p>
+        {% endif %}
+        
+    {% endfor %}
+    
+</body>
+</html>    
