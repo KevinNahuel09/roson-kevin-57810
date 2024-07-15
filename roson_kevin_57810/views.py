@@ -57,3 +57,23 @@ def delete_view(request):
     return render(request, 'delete.html')
 
 
+def update(request):
+    zapatillas = Zapatilla.objects.all()  # Obtener todas las zapatillas
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        nombre = request.POST.get('nombre')
+        talle = request.POST.get('talle')
+        color = request.POST.get('color')
+        precio = request.POST.get('precio')
+
+        # Actualizar todas las zapatillas
+        for zapatilla in zapatillas:
+            zapatilla.nombre = nombre
+            zapatilla.talle = talle
+            zapatilla.color = color
+            zapatilla.precio = precio
+            zapatilla.save()
+
+        return redirect('read')  # Redirigir a la lista después de actualizar
+
+    return render(request, 'update.html', {'zapatillas': zapatillas})
