@@ -60,3 +60,15 @@ def login_view(request):
         else:
             return HttpResponse("Usuario o contraseña incorrectos")
     return render(request, 'login.html')
+
+def create_view(request):
+    return render(request, 'create.html')
+
+def read_view(request):
+    return render(request, 'read.html')
+
+def update_view(request):
+    return render(request, 'update.html')
+
+def delete_view(request):
+    return render(request, 'delete.html')

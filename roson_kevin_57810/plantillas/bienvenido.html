@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto final</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1> Poryecto final de roson </h1>
-    <h2> vamos a desarrollar el proyectyo final</h2>
+    <h1> Proyecto final de Roson </h1>
+    <h2> Vamos a desarrollar el proyecto final </h2>
+    <nav>
+        <ul>
+            <li><a href="{% url 'create' %}">Cargar una zapatilla</a></li>
+            <li><a href="{% url 'read' %}">Ver las zapatillas disponibles</a></li>
+            <li><a href="{% url 'update' %}">Actualizar el precio de una zapatilla</a></li>
+            <li><a href="{% url 'delete' %}">Eliminar una zapatilla</a></li>
+        </ul>
+    </nav>
 </body>
 </html>

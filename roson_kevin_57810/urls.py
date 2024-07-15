@@ -21,6 +21,9 @@ from roson_kevin_57810.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
-    # path('login/', login_view, name='login'),
     path('bienvenido/', bienvenido, name='bienvenido'),
+    path('create/', create_view, name='create'),
+    path('read/', read_view, name='read'),
+    path('update/', update_view, name='update'),
+    path('delete/', delete_view, name='delete')
 ]

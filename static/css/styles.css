@@ -56,3 +56,27 @@ button {
 button:hover {
     background-color: #00509e; /* Azul más brillante */
 }
+
+nav {
+    margin-top: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #003366; /* Azul oscuro */
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #00509e; /* Azul más brillante */
+}
