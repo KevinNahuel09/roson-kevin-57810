@@ -1,26 +1,35 @@
 import sqlite3
+import random
 
 # Conexión a la base de datos
 conn = sqlite3.connect('kevin.db')
 c = conn.cursor()
 
-# Crear la tabla de usuarios
+# Crear la tabla de zapatillas
 c.execute('''
-    CREATE TABLE IF NOT EXISTS usuarios (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL,
-        password TEXT NOT NULL
-    )
+    CREATE TABLE IF NOT EXISTS Zapatilla (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    talle INTEGER NOT NULL,
+    color TEXT NOT NULL,
+    precio REAL NOT NULL
+);
 ''')
 
-# Insertar tres usuarios
-usuarios = [
-    ('kevin', 'kevin123'),
-    ('agus', 'agus123'),
-    ('peti', 'peti123')
+# Datos aleatorios para las zapatillas
+nombres = ['Zapatilla A', 'Zapatilla B', 'Zapatilla C', 'Zapatilla D', 
+           'Zapatilla E', 'Zapatilla F', 'Zapatilla G', 'Zapatilla H', 
+           'Zapatilla I', 'Zapatilla J']
+colores = ['Rojo', 'Azul', 'Verde', 'Negro', 'Blanco', 'Amarillo', 
+           'Gris', 'Naranja', 'Rosa', 'Marrón']
+
+# Insertar datos aleatorios para 10 zapatillas
+zapatillas = [
+    (nombres[i], random.randint(36, 45), random.choice(colores), round(random.uniform(50.0, 150.0), 2))
+    for i in range(10)
 ]
 
-c.executemany('INSERT INTO usuarios (username, password) VALUES (?, ?)', usuarios)
+c.executemany('INSERT INTO Zapatilla (nombre, talle, color, precio) VALUES (?, ?, ?, ?)', zapatillas)
 
 # Guardar cambios y cerrar la conexión
 conn.commit()

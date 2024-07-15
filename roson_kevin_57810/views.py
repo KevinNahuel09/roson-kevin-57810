@@ -1,8 +1,9 @@
 from django.template import Template , Context, loader
 from django.http import HttpResponse
+from .models import Zapatilla
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import datetime
 
 def saludar (request):
@@ -11,36 +12,8 @@ def saludar (request):
 
 
 def bienvenido(request):
-    saludo = f"Bienvenido al proyecto final"
-    return HttpResponse(saludo)
+    return render(request, 'bienvenido.html')
 
-def bienvenido_html(request, nombre, apellido):
-    hoy = datetime.datetime.now()
-    saludo = f"""
-    <html>
-    <h1> Bienvenidos al curso de Django!</h1>
-    <h2>Te damos la bienvenida {apellido} {nombre}</h2>
-    <h3>Hoy es {hoy}</h3>
-    </html>
-    """
-    return HttpResponse(saludo)
-
-def bienvenido_tpl(request):
-    with open("C:/Users/Morena/Desktop/roson_kevin_57810/roson_kevin_57810/plantillas/bienvenido.html") as miHtml:
-        plantilla = Template(miHtml.read())
-        contexto = Context()
-        saludo = plantilla.render(contexto) 
-    return HttpResponse(saludo)
-
-def bienvenido_tpl2(request):
-    hoy = datetime.datetime.now()
-    nombre = "Martin"
-    apellido = "Palermo"
-    Notas = [4,6,7]
-    contexto = {"nombre": nombre, "apellido": apellido , "hoy": hoy, "Notas": Notas}
-    plantilla = loader.get_template("bienvenido_tpl.html")
-    respuesta = plantilla.render(contexto)
-    return HttpResponse(respuesta)
 
 def home(request):
     with open('C:\\Users\\Morena\\Desktop\\roson-kevin-57810\\roson_kevin_57810\\plantillas\\home.html') as miHtml:
@@ -62,13 +35,25 @@ def login_view(request):
     return render(request, 'login.html')
 
 def create_view(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        talle = request.POST.get('talle')
+        color = request.POST.get('color')
+        precio = request.POST.get('precio')
+        
+        Zapatilla.objects.create(nombre=nombre, talle=talle, color=color, precio=precio)
+        return redirect('bienvenido')
+    
     return render(request, 'create.html')
 
 def read_view(request):
-    return render(request, 'read.html')
+    zapatillas = Zapatilla.objects.all()
+    return render(request, 'read.html', {'zapatillas': zapatillas})
 
 def update_view(request):
     return render(request, 'update.html')
 
 def delete_view(request):
     return render(request, 'delete.html')
+
+

@@ -1,15 +1,30 @@
-<!-- plantillas/read.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver</title>
+    <title>Leer Zapatillas</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Ver Zapatillas</h1>
-    <p>Esta es la página para ver las zapas.</p>
+    <h1>Lista de Zapatillas</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Talle</th>
+            <th>Color</th>
+            <th>Precio</th>
+        </tr>
+        {% for zapatilla in zapatillas %}
+        <tr>
+            <td>{{ zapatilla.nombre }}</td>
+            <td>{{ zapatilla.talle }}</td>
+            <td>{{ zapatilla.color }}</td>
+            <td>{{ zapatilla.precio }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'bienvenido' %}">Volver al Inicio</a>
 </body>
 </html>
