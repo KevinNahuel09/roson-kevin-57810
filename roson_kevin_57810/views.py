@@ -74,6 +74,10 @@ def update(request):
             zapatilla.precio = precio
             zapatilla.save()
 
-        return redirect('read')  # Redirigir a la lista después de actualizar
+        return redirect('read')  
 
     return render(request, 'update.html', {'zapatillas': zapatillas})
+
+def acerca_de_mi(request):
+    return render(request, 'acerca_de_mi.html')
+

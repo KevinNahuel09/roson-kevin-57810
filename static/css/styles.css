@@ -80,3 +80,13 @@ nav ul li a {
 nav ul li a:hover {
     color: #00509e; /* Azul más brillante */
 }
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.acerca-de-mi {
+    text-decoration: underline;
+    color: blue;
+}

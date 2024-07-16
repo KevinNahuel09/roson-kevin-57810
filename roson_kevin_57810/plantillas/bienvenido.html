@@ -6,17 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto final</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{% static 'images/R.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        footer a {
+            text-decoration: underline;
+            background-color: white; /* Fondo blanco */
+            padding: 5px; /* Espacio alrededor del texto */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+    </style>
 </head>
 <body>
-    <h1> Proyecto final de Roson </h1>
-    <h2> Vamos a desarrollar el proyecto final </h2>
-    <nav>
-        <ul>
-            <li><a href="{% url 'create' %}">Cargar una zapatilla</a></li>
-            <li><a href="{% url 'read' %}">Ver las zapatillas disponibles</a></li>
-            <li><a href="{% url 'update' %}">Actualizar el precio de una zapatilla</a></li>
-            <li><a href="{% url 'delete' %}">Eliminar una zapatilla</a></li>
-        </ul>
-    </nav>
+    <div class="background"></div>
+    <div class="content">
+        <h1>Proyecto final de Roson</h1>
+        <h2>Vamos a desarrollar el proyecto final</h2>
+        <nav>
+            <ul>
+                <li><a href="{% url 'create' %}">Crear Zapatilla</a></li>
+                <li><a href="{% url 'read' %}">Ver Zapatillas</a></li>
+                <li><a href="{% url 'update' %}">Actualizar Zapatilla</a></li>
+                <li><a href="{% url 'delete' %}">Eliminar Zapatilla</a></li>
+            </ul>
+        </nav>
+    </div>
+    <footer>
+        <a href="{% url 'acerca_de_mi' %}">Acerca de mí</a>
+    </footer>
 </body>
 </html>
