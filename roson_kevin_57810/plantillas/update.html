@@ -28,7 +28,7 @@
             display: flex;
             flex-direction: column;
         }
-        form label, form input {
+        form label, form select, form input, form button {
             margin: 5px 0;
         }
         button {
@@ -55,23 +55,30 @@
             <form method="POST">
                 {% csrf_token %}
                 
+                <label for="zapatilla_id">Selecciona ID:</label>
+                <select id="zapatilla_id" name="zapatilla_id" required>
+                    {% for zapatilla in zapatillas %}
+                        <option value="{{ zapatilla.id }}">{{ zapatilla.id }} - {{ zapatilla.nombre }}</option>
+                    {% endfor %}
+                </select>
+                
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="{{ zapatilla.nombre }}" required>
+                <input type="text" id="nombre" name="nombre" required>
 
                 <label for="talle">Talle:</label>
-                <input type="number" id="talle" name="talle" value="{{ zapatilla.talle }}" required>
+                <input type="number" id="talle" name="talle" required>
 
                 <label for="color">Color:</label>
-                <input type="text" id="color" name="color" value="{{ zapatilla.color }}" required>
+                <input type="text" id="color" name="color" required>
 
                 <label for="precio">Precio:</label>
-                <input type="text" id="precio" name="precio" value="{{ zapatilla.precio }}" required>
+                <input type="text" id="precio" name="precio" required>
 
                 <button type="submit">Actualizar</button>
             </form>
         </div>
     </div>
 
-    <a href="{% url 'read_view' %}">Volver a la lista de zapatillas</a>
+    <a href="{% url 'read' %}">Volver a la lista de zapatillas</a>
 </body>
 </html>

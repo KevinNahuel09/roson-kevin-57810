@@ -4,11 +4,66 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrar</title>
+    <title>Eliminar Zapatilla</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-column {
+            width: 45%;
+        }
+        .right-column {
+            width: 45%;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label, form select, form button {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Eliminar</h1>
-    <p>Esta es la página para eliminar una zapatilla.</p>
+    <h1>Eliminar Zapatilla</h1>
+    
+    <div class="container">
+        <div class="left-column">
+            <h2>Lista de Zapatillas</h2>
+            <ul>
+                {% for zapatilla in zapatillas %}
+                    <li>
+                        <strong>{{ zapatilla.nombre }}</strong> (ID: {{ zapatilla.id }})
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="right-column">
+            <h2>Eliminar Zapatilla</h2>
+            <form method="POST">
+                {% csrf_token %}
+                
+                <label for="zapatilla_id">Selecciona ID:</label>
+                <select id="zapatilla_id" name="zapatilla_id" required>
+                    {% for zapatilla in zapatillas %}
+                        <option value="{{ zapatilla.id }}">{{ zapatilla.id }} - {{ zapatilla.nombre }}</option>
+                    {% endfor %}
+                </select>
+                
+                <button type="submit">Eliminar</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="{% url 'read' %}">Volver a la lista de zapatillas</a>
 </body>
 </html>

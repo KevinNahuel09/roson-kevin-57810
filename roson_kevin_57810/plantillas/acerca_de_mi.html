@@ -7,8 +7,39 @@
     <title>Acerca de mí</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    h1 {
+        color: #5a5a5a;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    p {
+        line-height: 1.6;
+        font-size: 16px;
+    }
+</style>
 <body>
-    <h1>Acerca de mí</h1>
-    <p>Hola, soy Kevin Nahuel Roson, estudiante de la comisión número 57810 de Python. Este es el primer curso de Python que hago, tengo 31 años, soy de zona Sur del GBA y estoy muy expectante del resultado de este último TP.</p>
+    <div class="container">
+        <h1>Acerca de mí</h1>
+        <p>Hola, soy Kevin Nahuel Roson, estudiante de la comisión número 57810 de Python. Este es el primer curso de Python que hago, tengo 31 años, soy de zona Sur del GBA y estoy muy expectante del resultado de este último TP.</p>
+    </div>
 </body>
+<footer>
+    <a href="{% url 'bienvenido' %}">Volver al menu principal</a>
+</footer>
 </html>

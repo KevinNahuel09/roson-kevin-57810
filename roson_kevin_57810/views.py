@@ -55,50 +55,36 @@ def read_view(request):
     return render(request, 'read.html', {'zapatillas': zapatillas})
 
 def update_view(request):
-    zapatillas = Zapatilla.objects.all()  
+    zapatillas = Zapatilla.objects.all()
     if request.method == 'POST':
-        
+        zapatilla_id = request.POST.get('zapatilla_id')
         nombre = request.POST.get('nombre')
         talle = request.POST.get('talle')
         color = request.POST.get('color')
         precio = request.POST.get('precio')
 
-        for zapatilla in zapatillas:
-            zapatilla.nombre = nombre
-            zapatilla.talle = talle
-            zapatilla.color = color
-            zapatilla.precio = precio
-            zapatilla.save()
+        zapatilla = get_object_or_404(Zapatilla, id=zapatilla_id)
+        zapatilla.nombre = nombre
+        zapatilla.talle = talle
+        zapatilla.color = color
+        zapatilla.precio = precio
+        zapatilla.save()
 
-        return redirect('read')  
+        return redirect('read')
 
     return render(request, 'update.html', {'zapatillas': zapatillas})
 
 
 def delete_view(request):
-    return render(request, 'delete.html')
+    zapatillas = Zapatilla.objects.all()
+    if request.method == 'POST':
+        zapatilla_id = request.POST.get('zapatilla_id')
+        zapatilla = get_object_or_404(Zapatilla, id=zapatilla_id)
+        zapatilla.delete()
 
-# Obtener todas las zapatillas, Obtener datos del formulario, Actualizar todas las zapatillas
+        return redirect('read')
 
-# def update(request):
-#     zapatillas = Zapatilla.objects.all()  
-#     if request.method == 'POST':
-        
-#         nombre = request.POST.get('nombre')
-#         talle = request.POST.get('talle')
-#         color = request.POST.get('color')
-#         precio = request.POST.get('precio')
-
-#         for zapatilla in zapatillas:
-#             zapatilla.nombre = nombre
-#             zapatilla.talle = talle
-#             zapatilla.color = color
-#             zapatilla.precio = precio
-#             zapatilla.save()
-
-#         return redirect('read')  
-
-#     return render(request, 'update.html', {'zapatillas': zapatillas})
+    return render(request, 'delete.html', {'zapatillas': zapatillas})
 
 def acerca_de_mi(request):
     return render(request, 'acerca_de_mi.html')

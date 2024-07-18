@@ -8,3 +8,6 @@ class Zapatilla(models.Model):
 
     class Meta:
         db_table = 'zapatilla'
+
+    def __str__(self):
+        return f"{self.nombre} (Talle: {self.talle}, Color: {self.color}, Precio: {self.precio})"
