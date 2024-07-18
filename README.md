@@ -54,4 +54,4 @@ La aplicación web permite realizar las siguientes acciones:
 `python manage.py runserver`
 
 ### Información del Desarrollador
-# Hola, soy Kevin Nahuel Roson, estudiante de la comisión número 57810 de Python. Este es el primer curso de Python que hago. Tengo 31 años, soy de zona Sur del GBA y estoy muy expectante del resultado de este último TP.
+Hola, soy Kevin Nahuel Roson, estudiante de la comisión número 57810 de Python. Este es el primer curso de Python que hago. Tengo 31 años, soy de zona Sur del GBA y estoy muy expectante del resultado de este último TP.
