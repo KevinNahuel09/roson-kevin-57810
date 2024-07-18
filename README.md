@@ -1,5 +1,5 @@
-Proyecto Final de Roson - Comisión 57810
-Descripción del Proyecto
+# Proyecto Final de Roson - Comisión 57810
+## Descripción del Proyecto
 Este es el proyecto final desarrollado por Kevin Nahuel Roson para la comisión número 57810 del curso de Python. El proyecto consiste en una aplicación web básica para gestionar una colección de zapatillas, utilizando el framework Django.
 
 Funcionalidades
