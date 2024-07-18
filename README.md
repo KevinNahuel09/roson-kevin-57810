@@ -29,23 +29,28 @@ La aplicación web permite realizar las siguientes acciones:
 
 ### Clonar el repositorio:
 
-`git clone https://github.com/tu_usuario/tu_repositorio.git`
+```
+git clone https://github.com/tu_usuario/tu_repositorio.git
+```
 
 ### Navegar al directorio del proyecto:
 
-
-`cd tu_repositorio`
-
+```
+cd tu_repositorio
+```
 ### Crear y activar un entorno virtual:
 
-
-`python -m venv venv`
-`source venv/bin/activate  # En Windows usa venv\Scripts\activate`
-
+```
+python -m venv venv
+```
+```
+source venv/bin/activate  # En Windows usa venv\Scripts\activate
+```
 ### Instalar las dependencias:
 
-
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 ### Realizar las migraciones y ejecutar el servidor:
 
