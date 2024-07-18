@@ -40,16 +40,18 @@ La aplicación web permite realizar las siguientes acciones:
 
 
 `python -m venv venv`
-source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
+`source venv/bin/activate  # En Windows usa venv\Scripts\activate`
 
 ### Instalar las dependencias:
 
 
-pip install -r requirements.txt
-Realizar las migraciones y ejecutar el servidor:
+`pip install -r requirements.txt`
+
+### Realizar las migraciones y ejecutar el servidor:
 
 
-python manage.py migrate
-python manage.py runserver
-Información del Desarrollador
-Hola, soy Kevin Nahuel Roson, estudiante de la comisión número 57810 de Python. Este es el primer curso de Python que hago. Tengo 31 años, soy de zona Sur del GBA y estoy muy expectante del resultado de este último TP.
+`python manage.py migrate`
+`python manage.py runserver`
+
+### Información del Desarrollador
+# Hola, soy Kevin Nahuel Roson, estudiante de la comisión número 57810 de Python. Este es el primer curso de Python que hago. Tengo 31 años, soy de zona Sur del GBA y estoy muy expectante del resultado de este último TP.
