@@ -4,7 +4,9 @@ from .models import Zapatilla
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-import datetime
+from django.contrib import messages
+import sqlite3
+from django.views.decorators.csrf import csrf_protect
 
 def saludar (request):
     saludo = "Bienvenidos al proyecto final de Roson"
@@ -15,25 +17,26 @@ def bienvenido(request):
     return render(request, 'bienvenido.html')
 
 
+@csrf_protect
 def home(request):
-    with open('C:\\Users\\Morena\\Desktop\\roson-kevin-57810\\roson_kevin_57810\\plantillas\\home.html') as miHtml:
-        plantilla = Template(miHtml.read())
-        contexto = Context()
-        saludo = plantilla.render(contexto)
-    return HttpResponse(saludo)
-
-# Redirigir a la vista 'bienvenido'
-def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('bienvenido')  
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Conectar a la base de datos y verificar las credenciales
+        conn = sqlite3.connect('kevin.db')
+        c = conn.cursor()
+        c.execute('SELECT * FROM usuarios WHERE username = ? AND password = ?', (username, password))
+        user = c.fetchone()
+        conn.close()
+        
+        if user:
+            return redirect('bienvenido')
         else:
-            return HttpResponse("Usuario o contraseña incorrectos")
-    return render(request, 'login.html')
+            messages.error(request, 'Usuario o contraseña incorrectos')
+            return redirect('home')
+    return render(request, 'home.html')
+
 
 def create_view(request):
     if request.method == 'POST':
@@ -52,14 +55,6 @@ def read_view(request):
     return render(request, 'read.html', {'zapatillas': zapatillas})
 
 def update_view(request):
-    return render(request, 'update.html')
-
-def delete_view(request):
-    return render(request, 'delete.html')
-
-# Obtener todas las zapatillas, Obtener datos del formulario, Actualizar todas las zapatillas
-
-def update(request):
     zapatillas = Zapatilla.objects.all()  
     if request.method == 'POST':
         
@@ -78,6 +73,32 @@ def update(request):
         return redirect('read')  
 
     return render(request, 'update.html', {'zapatillas': zapatillas})
+
+
+def delete_view(request):
+    return render(request, 'delete.html')
+
+# Obtener todas las zapatillas, Obtener datos del formulario, Actualizar todas las zapatillas
+
+# def update(request):
+#     zapatillas = Zapatilla.objects.all()  
+#     if request.method == 'POST':
+        
+#         nombre = request.POST.get('nombre')
+#         talle = request.POST.get('talle')
+#         color = request.POST.get('color')
+#         precio = request.POST.get('precio')
+
+#         for zapatilla in zapatillas:
+#             zapatilla.nombre = nombre
+#             zapatilla.talle = talle
+#             zapatilla.color = color
+#             zapatilla.precio = precio
+#             zapatilla.save()
+
+#         return redirect('read')  
+
+#     return render(request, 'update.html', {'zapatillas': zapatillas})
 
 def acerca_de_mi(request):
     return render(request, 'acerca_de_mi.html')

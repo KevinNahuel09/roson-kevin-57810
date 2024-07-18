@@ -10,7 +10,12 @@
 <body>
     <h1> Zapateria Barrial Roson </h1>
     <h2> Ingrese para comenzar a navegar </h2>
-    <form method="post" action="{% url 'bienvenido' %}">
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post" action="{% url 'home' %}">
         {% csrf_token %}
         <label for="username">Usuario:</label>
         <input type="text" id="username" name="username" required>
