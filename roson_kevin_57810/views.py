@@ -22,6 +22,7 @@ def home(request):
         saludo = plantilla.render(contexto)
     return HttpResponse(saludo)
 
+# Redirigir a la vista 'bienvenido'
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -29,7 +30,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('bienvenido')  # Redirigir a la vista 'bienvenido'
+            return redirect('bienvenido')  
         else:
             return HttpResponse("Usuario o contraseña incorrectos")
     return render(request, 'login.html')
@@ -56,17 +57,17 @@ def update_view(request):
 def delete_view(request):
     return render(request, 'delete.html')
 
+# Obtener todas las zapatillas, Obtener datos del formulario, Actualizar todas las zapatillas
 
 def update(request):
-    zapatillas = Zapatilla.objects.all()  # Obtener todas las zapatillas
+    zapatillas = Zapatilla.objects.all()  
     if request.method == 'POST':
-        # Obtener datos del formulario
+        
         nombre = request.POST.get('nombre')
         talle = request.POST.get('talle')
         color = request.POST.get('color')
         precio = request.POST.get('precio')
 
-        # Actualizar todas las zapatillas
         for zapatilla in zapatillas:
             zapatilla.nombre = nombre
             zapatilla.talle = talle

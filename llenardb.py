@@ -5,7 +5,7 @@ import random
 conn = sqlite3.connect('kevin.db')
 c = conn.cursor()
 
-# Crear la tabla de zapatillas
+# Creacion de la tabla de zapatillas
 c.execute('''
     CREATE TABLE IF NOT EXISTS Zapatilla (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -16,14 +16,14 @@ c.execute('''
 );
 ''')
 
-# Datos aleatorios para las zapatillas
+# Datos para la tabla
 nombres = ['Zapatilla A', 'Zapatilla B', 'Zapatilla C', 'Zapatilla D', 
            'Zapatilla E', 'Zapatilla F', 'Zapatilla G', 'Zapatilla H', 
            'Zapatilla I', 'Zapatilla J']
 colores = ['Rojo', 'Azul', 'Verde', 'Negro', 'Blanco', 'Amarillo', 
            'Gris', 'Naranja', 'Rosa', 'Marrón']
 
-# Insertar datos aleatorios para 10 zapatillas
+# Insertar datos para 10 tipos de zapatillas
 zapatillas = [
     (nombres[i], random.randint(36, 45), random.choice(colores), round(random.uniform(50.0, 150.0), 2))
     for i in range(10)
