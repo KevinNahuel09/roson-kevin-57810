@@ -6,24 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> ZAPATERIA </title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: url("{% static 'images/Fondo home.jpeg' %}"); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 20px;
+            z-index: 2; 
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .form-box h2 {
+            margin-top: 0;
+        }
+
+        .form-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-box form label,
+        .form-box form input,
+        .form-box form button {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1> Zapateria Barrial Roson </h1>
-    <h2> Ingrese para comenzar a navegar </h2>
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-    <form method="post" action="{% url 'home' %}">
-        {% csrf_token %}
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Pass:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Ingresar</button>
-    </form>
+    <div class="form-container">
+        <div class="form-box">
+            <h2> Ingrese para comenzar a navegar </h2>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <p style="color: red;">{{ message }}</p>
+                    {% elif message.tags == 'success' %}
+                        <p style="color: green;">{{ message }}</p>
+                    {% else %}
+                        <p style="color: black;">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Pass:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" name="action" value="login">Ingresar</button>
+            </form>
+        </div>
+
+        <div class="form-box">
+            <h2>Registro de Usuario Nuevo</h2>
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <label for="new_username">Nuevo Usuario:</label>
+                <input type="text" id="new_username" name="new_username" required>
+                <label for="new_password">Nueva Pass:</label>
+                <input type="password" id="new_password" name="new_password" required>
+                <button type="submit" name="action" value="register">Registrar</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

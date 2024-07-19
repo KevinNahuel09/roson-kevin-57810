@@ -128,10 +128,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
+     messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
 }
 
 CSRF_COOKIE_SECURE = False 
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False 
 SESSION_COOKIE_HTTPONLY = True
+LOGIN_URL = 'home'  
+LOGOUT_REDIRECT_URL = 'home' 

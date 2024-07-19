@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 import sqlite3
 from django.views.decorators.csrf import csrf_protect
+from django.db import IntegrityError
 
 def saludar (request):
     saludo = "Bienvenidos al proyecto final de Roson"
@@ -20,21 +21,35 @@ def bienvenido(request):
 @csrf_protect
 def home(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        action = request.POST.get('action')
         
-        # Conectar a la base de datos y verificar las credenciales
-        conn = sqlite3.connect('kevin.db')
-        c = conn.cursor()
-        c.execute('SELECT * FROM usuarios WHERE username = ? AND password = ?', (username, password))
-        user = c.fetchone()
-        conn.close()
+        if action == 'login':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            # Autenticación de usuario
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('bienvenido')
+            else:
+                messages.error(request, 'Usuario o contraseña incorrectos')
         
-        if user:
-            return redirect('bienvenido')
-        else:
-            messages.error(request, 'Usuario o contraseña incorrectos')
-            return redirect('home')
+        elif action == 'register':
+            new_username = request.POST.get('new_username')
+            new_password = request.POST.get('new_password')
+            
+            try:
+                # Crear el nuevo usuario
+                User.objects.create_user(username=new_username, password=new_password)
+                messages.success(request, 'Usuario registrado con éxito.')
+            except IntegrityError:
+                messages.error(request, 'El nombre de usuario ya existe.')
+            except Exception as e:
+                messages.error(request, f'Ocurrió un error: {e}')
+        
+        return redirect('home')
+    
     return render(request, 'home.html')
 
 
@@ -50,8 +65,30 @@ def create_view(request):
     
     return render(request, 'create.html')
 
+def register_view(request):
+    if request.method == 'POST':
+        new_username = request.POST.get('new_username')
+        new_password = request.POST.get('new_password')
+        
+        if User.objects.filter(username=new_username).exists():
+            messages.error(request, 'El nombre de usuario ya existe.')
+            return redirect('home')
+        
+        user = User.objects.create_user(username=new_username, password=new_password)
+        user.save()
+        messages.success(request, 'Usuario registrado con éxito.')
+        return redirect('home')
+    
+    return render(request, 'home.html')
+
+
 def read_view(request):
-    zapatillas = Zapatilla.objects.all()
+    query = request.GET.get('q')
+    
+    if query:            
+        zapatillas = Zapatilla.objects.filter(nombre__icontains=query)
+    else:
+        zapatillas = Zapatilla.objects.all()
     return render(request, 'read.html', {'zapatillas': zapatillas})
 
 def update_view(request):
